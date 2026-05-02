@@ -99,7 +99,8 @@ export default function Watch() {
 
   let embedUrl = getEmbedUrl();
   if (embedUrl) {
-    embedUrl += embedUrl.includes('?') ? '&autoplay=1&auto_play=1' : '?autoplay=1&auto_play=1';
+    // Adding multiple variations of autoplay flags to catch all possible provider logic
+    embedUrl += embedUrl.includes('?') ? '&autoplay=1&auto_play=1&auto=1' : '?autoplay=1&auto_play=1&auto=1';
   }
   const title = media?.title || media?.name || '';
   const inWatchlist = media ? isInWatchlist(media.id) : false;
@@ -117,7 +118,8 @@ export default function Watch() {
   const canPrevEp = episode > 1;
 
   const goToEpisode = (s: number, e: number) => {
-    window.location.href = `${window.location.pathname}?season=${s}&episode=${e}`;
+    navigate(`?season=${s}&episode=${e}`, { replace: true });
+    setIframeLoaded(false); // Important: Reset loading state for the new episode
   };
 
   const availableSeasons = media?.seasons?.filter((s: any) => s.season_number > 0) ?? [];
