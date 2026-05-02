@@ -70,7 +70,7 @@ export default function Browse() {
     } finally {
       setLoading(false);
     }
-  }, [selectedGenre, sortBy, minRating, runtimeRange]);
+  }, [selectedGenre, sortBy, minRating, runtimeRange, yearRange]);
 
   useEffect(() => {
     async function getGenres() {
@@ -126,7 +126,7 @@ export default function Browse() {
             <select
               value={minRating}
               onChange={(e) => setMinRating(Number(e.target.value))}
-              className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer"
+              className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer [&>option]:bg-gray-900"
             >
               <option value={0}>Any Rating</option>
               <option value={8}>8.0+ Rating</option>
@@ -137,7 +137,7 @@ export default function Browse() {
             <select
               value={runtimeRange}
               onChange={(e) => setRuntimeRange(e.target.value)}
-              className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer"
+              className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer [&>option]:bg-gray-900"
             >
               <option value="any">Any Runtime</option>
               <option value="short">Under 90 mins</option>
@@ -148,7 +148,7 @@ export default function Browse() {
             <select
               value={yearRange}
               onChange={(e) => setYearRange(e.target.value)}
-              className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer"
+              className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer [&>option]:bg-gray-900"
             >
               <option value="any">Any Year</option>
               <option value="2020s">2020s</option>
@@ -161,7 +161,7 @@ export default function Browse() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer"
+              className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer [&>option]:bg-gray-900"
             >
               <option value="popularity.desc">Popularity</option>
               <option value="vote_average.desc">Rating</option>

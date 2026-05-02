@@ -123,7 +123,7 @@ export default function TvShows() {
           <select
             value={minRating}
             onChange={(e) => setMinRating(Number(e.target.value))}
-            className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer"
+            className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer [&>option]:bg-gray-900"
           >
             <option value={0}>Any Rating</option>
             <option value={8}>8.0+ Rating</option>
@@ -134,7 +134,7 @@ export default function TvShows() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer"
+            className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer [&>option]:bg-gray-900"
           >
             <option value="popularity.desc">Popularity</option>
             <option value="vote_average.desc">Rating</option>
