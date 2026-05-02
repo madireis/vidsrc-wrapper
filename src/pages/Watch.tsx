@@ -97,7 +97,10 @@ export default function Watch() {
     });
   }, [media, providerId, type, season, episode]);
 
-  const embedUrl = getEmbedUrl();
+  let embedUrl = getEmbedUrl();
+  if (embedUrl) {
+    embedUrl += embedUrl.includes('?') ? '&autoplay=1&auto_play=1' : '?autoplay=1&auto_play=1';
+  }
   const title = media?.title || media?.name || '';
   const inWatchlist = media ? isInWatchlist(media.id) : false;
 
