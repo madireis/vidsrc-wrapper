@@ -54,12 +54,12 @@ export const STREAM_PROVIDERS: StreamProvider[] = [
     getUrl: ({ type, tmdbId, imdbId, season, episode }) => {
       const base = 'https://vidsrc-embed.ru/embed';
       if (type === 'movie') {
-        if (imdbId) return `${base}/movie?imdb=${imdbId}&autoplay=1`;
-        return `${base}/movie?tmdb=${tmdbId}&autoplay=1`;
+        if (imdbId) return `${base}/movie?imdb=${imdbId}`;
+        return `${base}/movie?tmdb=${tmdbId}`;
       }
       if (type === 'tv' && season != null && episode != null) {
-        if (imdbId) return `${base}/tv?imdb=${imdbId}&season=${season}&episode=${episode}&autoplay=1`;
-        return `${base}/tv?tmdb=${tmdbId}&season=${season}&episode=${episode}&autoplay=1`;
+        if (imdbId) return `${base}/tv?imdb=${imdbId}&season=${season}&episode=${episode}`;
+        return `${base}/tv?tmdb=${tmdbId}&season=${season}&episode=${episode}`;
       }
       return null;
     },
