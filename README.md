@@ -1,10 +1,10 @@
-# 🍿 CinePulse: The Future of Cinematic Discovery
+# 🍿 CinePulse: Premium Movie & TV Streaming Platform (React 19 + TMDB)
 
 [![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**CinePulse** isn't just another movie tracker—it's a premium, high-performance streaming discovery engine. Designed with a sleek, dark-mode glassmorphic aesthetic, it brings a cinematic experience directly to your browser.
+**CinePulse** is a high-performance, open-source **movie and TV show streaming discovery engine**. Built for speed and aesthetics, this **React 19 movie application** uses a sleek, dark-mode glassmorphic design to provide a cinematic experience. It leverages the **TMDB API** for comprehensive metadata and integrates multiple **streaming providers** for a seamless viewing experience.
 
 ---
 
@@ -12,13 +12,13 @@
 
 | **Home Dashboard** | **Deep Discovery** |
 | :---: | :---: |
-| ![Home](./public/screenshots/home.png) | ![Detail](./public/screenshots/detail.png) |
-| *Immersive horizontal scrolling and dynamic hero sections.* | *Comprehensive metadata and cast details.* |
+| ![CinePulse Home Dashboard](./public/screenshots/home.png) | ![CinePulse Movie Detail Page](./public/screenshots/detail.png) |
+| *High-performance movie browsing with dynamic hero sections and horizontal scrolling.* | *Detailed movie metadata, cast profiles, and franchise collections.* |
 
 | **Cinematic Player** | **Viewer Analytics** |
 | :---: | :---: |
-| ![Player](./public/screenshots/player.png) | ![Stats](./public/screenshots/stats.png) |
-| *Seamless streaming with integrated controls.* | *Data-driven insights into your viewing habits.* |
+| ![CinePulse Online Video Player](./public/screenshots/player.png) | ![CinePulse User Analytics Dashboard](./public/screenshots/stats.png) |
+| *Advanced video player with binge-mode auto-play and multi-provider support.* | *Personal watch time analytics and genre heatmap tracking.* |
 
 ---
 

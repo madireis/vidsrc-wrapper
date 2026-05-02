@@ -2,6 +2,17 @@
   "name": "cinepulse",
   "private": true,
   "version": "1.0.0",
+  "description": "CinePulse is a premium movie and TV show streaming platform built with React 19, Tailwind CSS 4, and TMDB API. Featuring binge-mode auto-play, personalized analytics, and social sharing.",
+  "keywords": [
+    "streaming-platform",
+    "movie-app",
+    "react-19",
+    "tmdb-api",
+    "tailwind-css-4",
+    "binge-mode",
+    "movie-discovery",
+    "open-source-streaming"
+  ],
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
