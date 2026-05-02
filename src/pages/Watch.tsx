@@ -228,14 +228,21 @@ export default function Watch() {
                       key={p.id}
                       onClick={() => switchProvider(p.id)}
                       className={cn(
-                        'w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors text-left',
+                        'w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors text-left',
                         p.id === providerId
                           ? 'bg-brand-primary/15 text-brand-primary font-semibold'
                           : 'text-gray-400 hover:text-white hover:bg-white/5'
                       )}
                     >
-                      <span className={cn('w-1.5 h-1.5 rounded-full shrink-0', p.id === providerId ? 'bg-brand-primary' : 'bg-gray-600')} />
-                      {p.name}
+                      <div className="flex items-center gap-3">
+                        <span className={cn('w-1.5 h-1.5 rounded-full shrink-0', p.id === providerId ? 'bg-brand-primary' : 'bg-gray-600')} />
+                        {p.name}
+                      </div>
+                      {p.id === 'vidsrc' && (
+                        <span className="text-[10px] bg-yellow-500/20 text-yellow-500 font-bold px-1.5 py-0.5 rounded flex items-center gap-1 shrink-0 ml-2">
+                          <Star className="w-3 h-3 fill-yellow-500" /> Best
+                        </span>
+                      )}
                     </button>
                   ))}
                 </motion.div>
