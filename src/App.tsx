@@ -12,6 +12,7 @@ import TvDetail from './pages/TvDetail';
 import TvShows from './pages/TvShows';
 import Watch from './pages/Watch';
 import Search from './pages/Search';
+import Collection from './pages/Collection';
 import Watchlist from './pages/Watchlist';
 import History from './pages/History';
 import Stats from './pages/Stats';
@@ -44,6 +45,7 @@ function AppRoutes() {
         <Route path="/movie/:id" element={<MovieDetail />} />
         <Route path="/tv/:id" element={<TvDetail />} />
         <Route path="/person/:id" element={<Person />} />
+        <Route path="/collection/:id" element={<Collection />} />
       </Routes>
     </Layout>
   );

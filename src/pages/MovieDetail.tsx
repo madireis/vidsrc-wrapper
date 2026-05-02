@@ -10,6 +10,7 @@ export default function MovieDetail() {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [isHoveringTrailer, setIsHoveringTrailer] = useState(false);
   const { toggleWatchlist, isInWatchlist, addToHistory } = useWatchlist();
 
   useEffect(() => {
@@ -39,21 +40,34 @@ export default function MovieDetail() {
   if (!movie) return <div className="text-center py-20 text-gray-400 text-6xl">Movie not found</div>;
 
   const trailerUrl = tmdbService.getTrailerUrl(movie.videos?.results);
+  const autoplayTrailerUrl = tmdbService.getAutoplayTrailerUrl(movie.videos?.results);
   const inWatchlist = isInWatchlist(movie.id);
   const imdbId = movie.imdb_id || movie.external_ids?.imdb_id;
+  const directors = movie.credits?.crew?.filter((c: any) => c.job === 'Director') || [];
 
   return (
     <>
       <div className="space-y-12 pb-20">
         {/* Hero Section */}
-        <div className="relative h-[60vh] md:h-[85vh] -m-4 md:-m-8 overflow-hidden">
+        <div 
+          className="relative h-[60vh] md:h-[85vh] -m-4 md:-m-8 overflow-hidden"
+          onMouseEnter={() => setIsHoveringTrailer(true)}
+          onMouseLeave={() => setIsHoveringTrailer(false)}
+        >
           <img
             src={tmdbService.getImageUrl(movie.backdrop_path, 'original')}
             alt={movie.title}
-            className="w-full h-full object-cover"
+            className={cn("w-full h-full object-cover transition-opacity duration-700", isHoveringTrailer && autoplayTrailerUrl ? "opacity-0" : "opacity-100")}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-brand-bg/40 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-bg/80 to-transparent" />
+          {autoplayTrailerUrl && (
+            <iframe
+              src={autoplayTrailerUrl}
+              className={cn("absolute inset-0 w-full h-full scale-[1.35] pointer-events-none transition-opacity duration-700", isHoveringTrailer ? "opacity-100" : "opacity-0")}
+              allow="autoplay; encrypted-media"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-brand-bg/40 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-bg/80 to-transparent pointer-events-none" />
 
           <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-16 z-10 max-w-5xl">
             <motion.div
@@ -164,6 +178,18 @@ export default function MovieDetail() {
             <section className="bg-white/5 rounded-3xl pt-10 px-6 md:px-8 pb-8 border border-white/10 space-y-8">
               <h3 className="text-xl font-display font-bold tracking-tight text-white">Production Info</h3>
               <div className="space-y-4">
+                {directors.length > 0 && (
+                  <div>
+                    <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold">Director{directors.length > 1 ? 's' : ''}</p>
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {directors.map((d: any) => (
+                        <Link key={d.id} to={`/person/${d.id}`} className="text-brand-primary hover:underline text-base font-medium">
+                          {d.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <div>
                    <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold">Budget</p>
                   <p className="text-base font-medium">{formatCurrency(movie.budget)}</p>
@@ -191,6 +217,28 @@ export default function MovieDetail() {
                 )}
               </div>
             </section>
+
+            {/* Collection */}
+            {movie.belongs_to_collection && (
+              <section className="space-y-4">
+                <h3 className="text-xl font-display font-bold tracking-tight px-2">Collection</h3>
+                <Link to={`/collection/${movie.belongs_to_collection.id}`} className="block group">
+                  <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 group-hover:border-brand-primary transition-colors">
+                    <img
+                      src={tmdbService.getImageUrl(movie.belongs_to_collection.backdrop_path, 'w500')}
+                      alt={movie.belongs_to_collection.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <p className="text-sm font-bold text-white leading-tight drop-shadow-md">
+                        {movie.belongs_to_collection.name}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </section>
+            )}
 
             {/* Similar Movies */}
             <section className="space-y-4">

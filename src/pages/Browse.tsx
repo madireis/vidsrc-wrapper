@@ -13,6 +13,7 @@ export default function Browse() {
   const [sortBy, setSortBy] = useState('popularity.desc');
   const [minRating, setMinRating] = useState<number>(0);
   const [runtimeRange, setRuntimeRange] = useState<string>('any');
+  const [yearRange, setYearRange] = useState<string>('any');
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
@@ -40,6 +41,22 @@ export default function Browse() {
       }
       else if (runtimeRange === 'long') params['with_runtime.gte'] = 120;
 
+      if (yearRange === '2020s') {
+        params['primary_release_date.gte'] = '2020-01-01';
+        params['primary_release_date.lte'] = '2029-12-31';
+      } else if (yearRange === '2010s') {
+        params['primary_release_date.gte'] = '2010-01-01';
+        params['primary_release_date.lte'] = '2019-12-31';
+      } else if (yearRange === '2000s') {
+        params['primary_release_date.gte'] = '2000-01-01';
+        params['primary_release_date.lte'] = '2009-12-31';
+      } else if (yearRange === '1990s') {
+        params['primary_release_date.gte'] = '1990-01-01';
+        params['primary_release_date.lte'] = '1999-12-31';
+      } else if (yearRange === 'older') {
+        params['primary_release_date.lte'] = '1989-12-31';
+      }
+
       const data = await tmdbService.discoverMovies(params);
       
       if (isNew) {
@@ -66,7 +83,7 @@ export default function Browse() {
   useEffect(() => {
     setPage(1);
     fetchMovies(1, true);
-  }, [selectedGenre, sortBy, minRating, runtimeRange, fetchMovies]);
+  }, [selectedGenre, sortBy, minRating, runtimeRange, yearRange, fetchMovies]);
 
   useEffect(() => {
     if (inView && hasMore && !loading) {
@@ -126,6 +143,19 @@ export default function Browse() {
               <option value="short">Under 90 mins</option>
               <option value="med">90 - 120 mins</option>
               <option value="long">Over 120 mins</option>
+            </select>
+
+            <select
+              value={yearRange}
+              onChange={(e) => setYearRange(e.target.value)}
+              className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer"
+            >
+              <option value="any">Any Year</option>
+              <option value="2020s">2020s</option>
+              <option value="2010s">2010s</option>
+              <option value="2000s">2000s</option>
+              <option value="1990s">1990s</option>
+              <option value="older">Older</option>
             </select>
 
             <select

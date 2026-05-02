@@ -133,6 +133,11 @@ export const tmdbService = {
     return data;
   },
 
+  getCollectionDetails: async (collectionId: number) => {
+    const { data } = await api.get(`/collection/${collectionId}`);
+    return data;
+  },
+
   // ─── TV Shows ────────────────────────────────────────────────────────────────
   getTrendingTv: async (page = 1) => {
     const { data } = await api.get('/trending/tv/day', { params: { page } });
@@ -190,5 +195,10 @@ export const tmdbService = {
   getTrailerUrl: (videos: any[]) => {
     const trailer = videos?.find((v) => v.type === 'Trailer' && v.site === 'YouTube');
     return trailer ? `https://www.youtube.com/embed/${trailer.key}` : null;
+  },
+
+  getAutoplayTrailerUrl: (videos: any[]) => {
+    const trailer = videos?.find((v) => v.type === 'Trailer' && v.site === 'YouTube');
+    return trailer ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&iv_load_policy=3&loop=1&playlist=${trailer.key}` : null;
   },
 };

@@ -11,6 +11,7 @@ export default function TvDetail() {
   const navigate = useNavigate();
   const [show, setShow] = useState<TvShow | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isHoveringTrailer, setIsHoveringTrailer] = useState(false);
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [seasonData, setSeasonData] = useState<TvSeason | null>(null);
   const [seasonLoading, setSeasonLoading] = useState(false);
@@ -80,19 +81,32 @@ export default function TvDetail() {
   const imdbId = show.external_ids?.imdb_id;
   const inWatchlist = isInWatchlist(show.id);
   const trailerUrl = tmdbService.getTrailerUrl((show as any).videos?.results);
+  const autoplayTrailerUrl = tmdbService.getAutoplayTrailerUrl((show as any).videos?.results);
   const availableSeasons = show.seasons?.filter((s) => s.season_number > 0) ?? [];
+  const creators = (show as any).created_by || [];
 
   return (
     <div className="space-y-12 pb-20">
       {/* Hero */}
-      <div className="relative h-[60vh] md:h-[85vh] -m-4 md:-m-8 overflow-hidden">
+      <div 
+        className="relative h-[60vh] md:h-[85vh] -m-4 md:-m-8 overflow-hidden"
+        onMouseEnter={() => setIsHoveringTrailer(true)}
+        onMouseLeave={() => setIsHoveringTrailer(false)}
+      >
           <img
             src={tmdbService.getImageUrl(show.backdrop_path, 'original')}
             alt={show.name}
-            className="w-full h-full object-cover"
+            className={cn("w-full h-full object-cover transition-opacity duration-700", isHoveringTrailer && autoplayTrailerUrl ? "opacity-0" : "opacity-100")}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-brand-bg/40 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-bg/80 to-transparent" />
+          {autoplayTrailerUrl && (
+            <iframe
+              src={autoplayTrailerUrl}
+              className={cn("absolute inset-0 w-full h-full scale-[1.35] pointer-events-none transition-opacity duration-700", isHoveringTrailer ? "opacity-100" : "opacity-0")}
+              allow="autoplay; encrypted-media"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-brand-bg/40 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-bg/80 to-transparent pointer-events-none" />
 
           <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-16 z-10 max-w-5xl">
             <motion.div
@@ -306,6 +320,18 @@ export default function TvDetail() {
             <section className="bg-white/5 rounded-3xl pt-10 px-6 md:px-8 pb-8 border border-white/10 space-y-8">
               <h3 className="text-xl font-display font-bold tracking-tight text-white">Show Info</h3>
               <div className="space-y-4">
+                {creators.length > 0 && (
+                  <div>
+                    <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold">Creator{creators.length > 1 ? 's' : ''}</p>
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {creators.map((c: any) => (
+                        <Link key={c.id} to={`/person/${c.id}`} className="text-brand-primary hover:underline text-base font-medium">
+                          {c.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 {show.status && (
                   <div>
                     <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold">Status</p>

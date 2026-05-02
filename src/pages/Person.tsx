@@ -45,6 +45,7 @@ export default function Person() {
   const seen = new Set<string>();
   const raw = [
     ...(person.combined_credits?.cast || []),
+    ...(person.combined_credits?.crew || []),
   ].sort((a, b) => {
     const dateA = a.release_date || a.first_air_date || '';
     const dateB = b.release_date || b.first_air_date || '';
@@ -252,9 +253,9 @@ export default function Person() {
                     <p className="text-sm font-semibold text-white line-clamp-2 group-hover:text-brand-primary transition-colors leading-tight">
                       {title}
                     </p>
-                    {credit.character && (
+                    {(credit.character || credit.job) && (
                       <p className="text-xs text-gray-500 line-clamp-1 italic mt-0.5">
-                        {credit.character}
+                        {credit.character || credit.job}
                       </p>
                     )}
                     {year && <p className="text-xs text-gray-600 mt-0.5">{year}</p>}

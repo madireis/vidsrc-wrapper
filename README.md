@@ -106,21 +106,20 @@ This project is for **educational purposes only**. CinePulse is a frontend demon
 | ✅ | SEO meta tags, keywords, and dynamic document titles |
 | ✅ | Mobile-first responsive layout with slide-out nav |
 | ✅ | Removed auth/sign-in — fully open, no account needed |
-
+| ✅ | **Multi-provider support** — VidSrc, VidSrc2, SuperEmbed, 2Embed |
+| ✅ | Provider selector UI — let user pick their preferred source |
+| ✅ | Keyboard shortcuts — F for fullscreen, arrow keys for episodes |
+| ✅ | Trailer auto-play in hero section on hover |
+| ✅ | Advanced filters — year range and runtime filtering |
+| ✅ | **Collections & franchises** — view full MCU, Star Wars etc. |
+| ✅ | Director & crew pages (linked from production info) |
 ---
 
 ### 🔜 Coming Soon
 
 | | Feature | Priority |
 |---|---|---|
-| 🔲 | **Multi-provider support** — fallback between VidSrc, VidSrc2, SuperEmbed, 2Embed | 🔥 High |
-| 🔲 | Provider selector UI — let user pick their preferred source | 🔥 High |
 | 🔲 | **Continue Watching** row on home dashboard | 🔥 High |
-| 🔲 | Trailer auto-play in hero section on hover | ⚡ Medium |
-| 🔲 | Advanced filters — runtime, year range, quality, language | ⚡ Medium |
-| 🔲 | **Collections & franchises** — view full MCU, Star Wars etc. | ⚡ Medium |
-| 🔲 | Keyboard shortcuts — space to pause, arrow keys for episodes | ⚡ Medium |
-| 🔲 | Director & crew pages (similar to actor pages) | ⚡ Medium |
 | 🔲 | Progressive Web App (PWA) — install on mobile | 🧊 Low |
 | 🔲 | Dark/light theme toggle | 🧊 Low |
 | 🔲 | Export watch history as CSV | 🧊 Low |
