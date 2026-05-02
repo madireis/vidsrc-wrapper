@@ -114,8 +114,7 @@ export default function Watch() {
   const canPrevEp = episode > 1;
 
   const goToEpisode = (s: number, e: number) => {
-    navigate(`?season=${s}&episode=${e}`, { replace: true });
-    setIframeLoaded(false); // Important: Reset loading state for the new episode
+    window.location.href = `${window.location.pathname}?season=${s}&episode=${e}`;
   };
 
   const availableSeasons = media?.seasons?.filter((s: any) => s.season_number > 0) ?? [];
