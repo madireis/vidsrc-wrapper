@@ -122,9 +122,13 @@ This project is for **educational purposes only**. CinePulse is a frontend demon
 | | Feature | Priority |
 |---|---|---|
 | 🔲 | **Continue Watching** row on home dashboard | 🔥 High |
+| 🔲 | Auto-play next episode (Binge Mode) | 🔥 High |
 | 🔲 | Smart Player Fallback — auto-switch providers if a stream fails | 🔥 High |
+| 🔲 | Cloud Sync — sync watch history & lists across devices | ⚡ Medium |
+| 🔲 | Custom subtitle uploads (.srt / .vtt) in player | ⚡ Medium |
 | 🔲 | Cast to TV / Chromecast support | ⚡ Medium |
 | 🔲 | Picture-in-Picture (PiP) mode for player | ⚡ Medium |
+| 🔲 | Social sharing — share favorite movies/shows with rich previews | 🧊 Low |
 | 🔲 | Progressive Web App (PWA) — install on mobile | 🧊 Low |
 | 🔲 | Export watch history & lists as CSV | 🧊 Low |
 
