@@ -64,6 +64,21 @@ export const STREAM_PROVIDERS: StreamProvider[] = [
       return null;
     },
   },
+  {
+    id: 'godrive',
+    name: 'GoDrive',
+    getUrl: ({ type, tmdbId, imdbId, season, episode }) => {
+      const base = 'https://godriveplayer.com/player.php';
+      if (type === 'movie') {
+        if (imdbId) return `${base}?imdb=${imdbId}`;
+        return `${base}?tmdb=${tmdbId}`; // Fallback to TMDB if IMDB ID is missing
+      }
+      if (type === 'tv' && season != null && episode != null) {
+        return `${base}?type=series&tmdb=${tmdbId}&season=${season}&episode=${episode}`;
+      }
+      return null;
+    },
+  },
 ];
 
 export const DEFAULT_PROVIDER_ID = 'vidsrc';
