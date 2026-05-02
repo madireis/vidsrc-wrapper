@@ -153,6 +153,33 @@ export default function Watch() {
     return () => window.removeEventListener('keydown', onKey);
   }, [canNextEp, canPrevEp, season, episode]);
 
+  // ─── PostMessage Auto-Play Listener ───────────────────────────────────────
+  useEffect(() => {
+    if (!autoPlayNext || type !== 'tv' || !canNextEp) return;
+
+    const handleMessage = (e: MessageEvent) => {
+      // Some iframe players broadcast when the video ends. Catch generic flags.
+      try {
+        const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+        if (
+          data === 'ended' || 
+          data === 'video_ended' || 
+          data?.event === 'ended' || 
+          data?.type === 'video_ended'
+        ) {
+          goToEpisode(season, episode + 1);
+        }
+      } catch (err) {
+        if (e.data === 'ended' || e.data === 'video_ended') {
+          goToEpisode(season, episode + 1);
+        }
+      }
+    };
+    
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [autoPlayNext, type, canNextEp, season, episode]);
+
   // ─── Native fullscreen helper ─────────────────────────────────────────────
   const toggleFullscreen = () => {
     const el = playerContainerRef.current;
