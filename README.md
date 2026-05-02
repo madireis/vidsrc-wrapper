@@ -106,13 +106,15 @@ This project is for **educational purposes only**. CinePulse is a frontend demon
 | ✅ | SEO meta tags, keywords, and dynamic document titles |
 | ✅ | Mobile-first responsive layout with slide-out nav |
 | ✅ | Removed auth/sign-in — fully open, no account needed |
-| ✅ | **Multi-provider support** — VidSrc, VidSrc2, SuperEmbed, 2Embed |
+| ✅ | **Multi-provider support** — VidSrc.me, SuperEmbed, 2Embed, VidSrc Pro |
 | ✅ | Provider selector UI — let user pick their preferred source |
+| ✅ | 'Best' star badge indicator for recommended stream providers |
 | ✅ | Keyboard shortcuts — F for fullscreen, arrow keys for episodes |
 | ✅ | Trailer auto-play in hero section on hover |
 | ✅ | Advanced filters — year range and runtime filtering |
 | ✅ | **Collections & franchises** — view full MCU, Star Wars etc. |
 | ✅ | Director & crew pages (linked from production info) |
+
 ---
 
 ### 🔜 Coming Soon
@@ -120,9 +122,11 @@ This project is for **educational purposes only**. CinePulse is a frontend demon
 | | Feature | Priority |
 |---|---|---|
 | 🔲 | **Continue Watching** row on home dashboard | 🔥 High |
+| 🔲 | Smart Player Fallback — auto-switch providers if a stream fails | 🔥 High |
+| 🔲 | Cast to TV / Chromecast support | ⚡ Medium |
+| 🔲 | Picture-in-Picture (PiP) mode for player | ⚡ Medium |
 | 🔲 | Progressive Web App (PWA) — install on mobile | 🧊 Low |
-| 🔲 | Dark/light theme toggle | 🧊 Low |
-| 🔲 | Export watch history as CSV | 🧊 Low |
+| 🔲 | Export watch history & lists as CSV | 🧊 Low |
 
 ---
 
