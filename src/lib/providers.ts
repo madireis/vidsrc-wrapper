@@ -19,17 +19,6 @@ export const STREAM_PROVIDERS: StreamProvider[] = [
     id: 'vidsrc',
     name: 'VidSrc',
     getUrl: ({ type, tmdbId, imdbId, season, episode }) => {
-      const base = 'https://vidsrc.to/embed';
-      if (type === 'movie') return `${base}/movie/${imdbId || tmdbId}`;
-      if (type === 'tv' && season != null && episode != null)
-        return `${base}/tv/${imdbId || tmdbId}/${season}/${episode}`;
-      return null;
-    },
-  },
-  {
-    id: 'vidsrc2',
-    name: 'VidSrc 2',
-    getUrl: ({ type, tmdbId, imdbId, season, episode }) => {
       const base = 'https://vidsrc.me/embed';
       if (type === 'movie') return `${base}/movie?tmdb=${tmdbId}`;
       if (type === 'tv' && season != null && episode != null)
