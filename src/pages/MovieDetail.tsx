@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { tmdbService, Movie } from '../services/tmdb';
-import { Star, Clock, Calendar, Play, Heart, CheckCircle2 } from 'lucide-react';
+import { Star, Clock, Calendar, Play, Heart, CheckCircle2, Share2 } from 'lucide-react';
 import { cn, formatCurrency, formatRuntime } from '../lib/utils';
 import { motion } from 'motion/react';
 import { useWatchlist } from '../context/WatchlistContext';
@@ -12,6 +12,23 @@ export default function MovieDetail() {
   const [loading, setLoading] = useState(true);
   const [isHoveringTrailer, setIsHoveringTrailer] = useState(false);
   const { toggleWatchlist, isInWatchlist, addToHistory } = useWatchlist();
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: movie?.title,
+          text: `Check out ${movie?.title} on CinePulse!`,
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('Link copied to clipboard!');
+    }
+  };
 
   useEffect(() => {
     async function getDetails() {
@@ -125,6 +142,13 @@ export default function MovieDetail() {
               >
                 {inWatchlist ? <CheckCircle2 className="w-5 h-5" /> : <Heart className="w-5 h-5" />}
                 <span>{inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}</span>
+              </button>
+              <button
+                onClick={handleShare}
+                className="px-6 py-4 rounded-xl font-bold flex items-center justify-center transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 text-white hover:scale-105"
+                title="Share"
+              >
+                <Share2 className="w-5 h-5" />
               </button>
             </div>
           </div>

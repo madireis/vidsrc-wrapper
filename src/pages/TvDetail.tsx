@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { tmdbService, TvShow, TvSeason, TvEpisode } from '../services/tmdb';
-import { Star, Calendar, Play, Heart, CheckCircle2, Tv, ChevronDown, ChevronUp } from 'lucide-react';
+import { Star, Calendar, Play, Heart, CheckCircle2, Tv, ChevronDown, ChevronUp, Share2 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 import { useWatchlist } from '../context/WatchlistContext';
@@ -12,6 +12,23 @@ export default function TvDetail() {
   const [show, setShow] = useState<TvShow | null>(null);
   const [loading, setLoading] = useState(true);
   const [isHoveringTrailer, setIsHoveringTrailer] = useState(false);
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: show?.name,
+          text: `Check out ${show?.name} on CinePulse!`,
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('Link copied to clipboard!');
+    }
+  };
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [seasonData, setSeasonData] = useState<TvSeason | null>(null);
   const [seasonLoading, setSeasonLoading] = useState(false);
@@ -162,6 +179,13 @@ export default function TvDetail() {
               >
                 {inWatchlist ? <CheckCircle2 className="w-5 h-5" /> : <Heart className="w-5 h-5" />}
                 <span>{inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}</span>
+              </button>
+              <button
+                onClick={handleShare}
+                className="px-6 py-4 rounded-xl font-bold flex items-center justify-center transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 text-white hover:scale-105"
+                title="Share"
+              >
+                <Share2 className="w-5 h-5" />
               </button>
             </div>
           </div>

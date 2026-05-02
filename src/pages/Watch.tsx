@@ -3,7 +3,7 @@ import { useParams, useSearchParams, Link, useNavigate } from 'react-router-dom'
 import { tmdbService } from '../services/tmdb';
 import {
   ArrowLeft, Star, Clock, Calendar, Play, Heart, CheckCircle2,
-  Tv, ChevronDown, ChevronUp, SkipForward, SkipBack, Maximize2, Minimize2, List, Radio
+  Tv, ChevronDown, ChevronUp, SkipForward, SkipBack, Maximize2, Minimize2, List, Radio, ToggleLeft, ToggleRight
 } from 'lucide-react';
 import { cn, formatRuntime } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
@@ -27,6 +27,17 @@ export default function Watch() {
   const playerContainerRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showInPlayerEpisodes, setShowInPlayerEpisodes] = useState(false);
+  const [autoPlayNext, setAutoPlayNext] = useState(() => {
+    return localStorage.getItem('cinepulse_autoplay') === 'true';
+  });
+
+  const toggleAutoPlay = () => {
+    setAutoPlayNext(prev => {
+      const next = !prev;
+      localStorage.setItem('cinepulse_autoplay', String(next));
+      return next;
+    });
+  };
   const [providerId, setProviderId] = useState<string>(getStoredProviderId());
   const [showProviderMenu, setShowProviderMenu] = useState(false);
 
@@ -249,6 +260,23 @@ export default function Watch() {
               )}
             </AnimatePresence>
           </div>
+
+          {/* Auto-Play Toggle (TV Only) */}
+          {type === 'tv' && (
+            <button
+              onClick={toggleAutoPlay}
+              className={cn(
+                "hidden md:flex items-center gap-2 text-xs px-3 py-2 rounded-lg transition-all border",
+                autoPlayNext
+                  ? "bg-brand-primary/20 text-brand-primary border-brand-primary/30"
+                  : "bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border-white/5"
+              )}
+              title="Auto-Play Next Episode (Binge Mode)"
+            >
+              {autoPlayNext ? <ToggleRight className="w-5 h-5 text-brand-primary" /> : <ToggleLeft className="w-5 h-5 text-gray-500" />}
+              <span>Auto-Play</span>
+            </button>
+          )}
 
           {/* Fullscreen shortcut */}
           <button
