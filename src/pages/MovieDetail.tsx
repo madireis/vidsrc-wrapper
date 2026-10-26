@@ -269,7 +269,7 @@ export default function MovieDetail() {
               <h3 className="text-xl font-display font-bold tracking-tight px-2">Similar Movies</h3>
               <div className="grid grid-cols-2 gap-4">
                 {movie.similar?.results?.slice(0, 4).map((m: Movie) => (
-                  <a key={m.id} href={`/movie/${m.id}`} className="group cursor-pointer">
+                  <Link key={m.id} to={`/movie/${m.id}`} className="group cursor-pointer">
                     <div className="aspect-[2/3] rounded-xl overflow-hidden mb-2">
                       <img
                         src={tmdbService.getImageUrl(m.poster_path)}
@@ -278,7 +278,7 @@ export default function MovieDetail() {
                       />
                     </div>
                     <p className="text-xs font-semibold line-clamp-1">{m.title}</p>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </section>

@@ -5,9 +5,29 @@
 
 import axios from 'axios';
 
+// When running on GitHub Pages (or static hosts without Express backend),
+// call TMDB directly using the client-side API key.
+const TMDB_DIRECT_KEY =
+  (import.meta.env.VITE_TMDB_API_KEY as string) ||
+  'b911e74a3d17f8b87b908346ee2881ab';
+
+const isStaticDeploy =
+  import.meta.env.PROD ||
+  window.location.hostname.includes('github.io');
+
 const api = axios.create({
-  baseURL: '/api/movies',
+  baseURL: isStaticDeploy ? 'https://api.themoviedb.org/3' : '/api/movies',
 });
+
+if (isStaticDeploy) {
+  api.interceptors.request.use((config) => {
+    config.params = {
+      api_key: TMDB_DIRECT_KEY,
+      ...config.params,
+    };
+    return config;
+  });
+}
 
 export interface Movie {
   id: number;

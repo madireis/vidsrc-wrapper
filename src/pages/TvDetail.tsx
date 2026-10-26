@@ -391,7 +391,7 @@ export default function TvDetail() {
               <h3 className="text-xl font-display font-bold tracking-tight">Similar Shows</h3>
               <div className="grid grid-cols-2 gap-4">
                 {(show as any).similar?.results?.slice(0, 4).map((s: any) => (
-                  <a key={s.id} href={`/tv/${s.id}`} className="group cursor-pointer">
+                  <Link key={s.id} to={`/tv/${s.id}`} className="group cursor-pointer">
                     <div className="aspect-[2/3] rounded-xl overflow-hidden mb-2">
                       <img
                         src={tmdbService.getImageUrl(s.poster_path)}
@@ -400,7 +400,7 @@ export default function TvDetail() {
                       />
                     </div>
                     <p className="text-xs font-semibold line-clamp-1">{s.name}</p>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </section>

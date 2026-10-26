@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { tmdbService } from '../services/tmdb';
 import {
-  ArrowLeft, Star, Clock, Calendar, Play, Heart, CheckCircle2,
+  ArrowLeft, Home, Flame, Star, Clock, Calendar, Play, Heart, CheckCircle2,
   Tv, ChevronDown, ChevronUp, SkipForward, SkipBack, Maximize2, Minimize2, List, Radio, ToggleLeft, ToggleRight
 } from 'lucide-react';
 import { cn, formatRuntime } from '../lib/utils';
@@ -114,7 +114,7 @@ export default function Watch() {
   const canPrevEp = episode > 1;
 
   const goToEpisode = (s: number, e: number) => {
-    window.location.href = `${window.location.pathname}?season=${s}&episode=${e}`;
+    setSearchParams({ season: s.toString(), episode: e.toString() });
   };
 
   const availableSeasons = media?.seasons?.filter((s: any) => s.season_number > 0) ?? [];
@@ -220,15 +220,40 @@ export default function Watch() {
     <div className="min-h-screen bg-[#070809]">
       {/* ── TOP BAR ─────────────────────────────────────────────────────────── */}
       <header className="flex items-center justify-between px-6 py-4 bg-black/60 backdrop-blur-md border-b border-white/5 sticky top-0 z-30">
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
-        >
-          <div className="w-9 h-9 rounded-full bg-white/5 group-hover:bg-white/10 flex items-center justify-center transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-          </div>
-          <span className="text-sm font-medium hidden sm:block">Back</span>
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
+            title="Go back"
+          >
+            <div className="w-9 h-9 rounded-full bg-white/5 group-hover:bg-white/10 flex items-center justify-center transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+            </div>
+            <span className="text-sm font-medium hidden sm:block">Back</span>
+          </button>
+
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
+            title="Go to Home"
+          >
+            <div className="w-9 h-9 rounded-full bg-white/5 group-hover:bg-white/10 flex items-center justify-center transition-colors">
+              <Home className="w-4 h-4" />
+            </div>
+            <span className="text-sm font-medium hidden sm:block">Home</span>
+          </Link>
+
+          <div className="w-px h-6 bg-white/10 hidden lg:block mx-2" />
+
+          <Link to="/" className="hidden lg:flex items-center gap-2 group">
+            <div className="w-8 h-8 rounded-lg bg-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/20 group-hover:scale-105 transition-transform">
+              <Flame className="w-4 h-4 text-white fill-white" />
+            </div>
+            <span className="text-lg font-display font-bold text-white">
+              Cine<span className="text-brand-primary">Pulse</span>
+            </span>
+          </Link>
+        </div>
 
         <div className="flex-1 px-6 min-w-0">
           <h1 className="text-white font-display font-bold text-lg truncate">
