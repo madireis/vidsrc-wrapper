@@ -3,6 +3,7 @@
 [![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-58a6ff?style=flat&logo=github)](https://madireis.github.io/vidsrc-wrapper/)
 
 **CinePulse** is a high-performance, open-source **movie and TV show streaming discovery engine**. Built for speed and aesthetics, this **React 19 movie application** uses a sleek, dark-mode glassmorphic design to provide a cinematic experience. It leverages the **TMDB API** for comprehensive metadata and integrates multiple **streaming providers** for a seamless viewing experience.
 
